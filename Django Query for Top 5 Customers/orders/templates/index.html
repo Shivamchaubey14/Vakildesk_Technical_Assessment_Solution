@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Customers</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@600&display=swap">
+    <style>
+        body {
+            font-family: 'Fira Code', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f8f8;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        td {
+            font-size: 200%;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Top 5 Customers</h1>
+        {% if top_customers %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Total Spent</th>
+                        <th>Most Recent Order Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in top_customers %}
+                        <tr>
+                            <td>{{ customer.customer }}</td>
+                            <td>₹{{ customer.total_spent }}</td>
+                            <td>{{ customer.most_recent_order_date|date:"Y-m-d" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No data available</p>
+        {% endif %}
+    </div>
+</body>
+</html>
